@@ -39,10 +39,8 @@ jobs:
             fi
 
           elif [[ "$TARGET" == "dev" ]]; then
-            if [[ "$SOURCE" != feature/* &&
-                  "$SOURCE" != fix/* &&
-                  "$SOURCE" != hotfix/* ]]; then
-              echo "::error::Only feature/*, fix/*, or hotfix/* can merge into dev."
+            if [[ ! "$SOURCE" =~ ^(feature|fix|hotfix|docs|style|refactor|chore)/.+$ ]]; then
+              echo "::error::Invalid branch naming."
               exit 1
             fi
           fi
