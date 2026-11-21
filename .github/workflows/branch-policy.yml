@@ -38,13 +38,13 @@ jobs:
               exit 1
             fi
 
-          elif [[ "$TARGET" == "dev" ]]; then
-            if [[ "$SOURCE" != feature/* &&
-                  "$SOURCE" != fix/* &&
-                  "$SOURCE" != hotfix/* ]]; then
-              echo "::error::Only feature/*, fix/*, or hotfix/* can merge into dev."
-              exit 1
+            
+            elif [[ "$TARGET" == "dev" ]]; then
+              if [[ ! "$SOURCE" =~ ^(feature|fix|docs|style|refactor|chore)/.+$ ]]; then
+                echo "::error::Invalid branch naming."
+                echo "Allowed: feature/*, fix/*, hotfix/*, docs/*, style/*, refactor/*, chore/*"
+                exit 1
+              fi
             fi
-          fi
 
           echo "Branch policy passed!"
