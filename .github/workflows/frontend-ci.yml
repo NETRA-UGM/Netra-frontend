@@ -33,8 +33,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: ESLint check
+        run: pnpm run lint
+
       - name: TypeScript check
-        run: pnpm typecheck
+        run: pnpm run typecheck
 
       - name: Build Next.js
-        run: pnpm build
+        run: pnpm run build
