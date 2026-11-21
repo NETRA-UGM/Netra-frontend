@@ -1,0 +1,50 @@
+
+name: NETRA Branch Policy
+
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - edited
+
+permissions:
+  contents: read
+
+jobs:
+  validate-branch:
+    name: Validate Branch Policy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate PR source and target
+        shell: bash
+        env:
+          SOURCE: ${{ github.head_ref }}
+          TARGET: ${{ github.base_ref }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          BASE_REPO: ${{ github.event.pull_request.base.repo.full_name }}
+        run: |
+          echo "Source: $SOURCE"
+          echo "Target: $TARGET"
+
+          if [[ "$TARGET" == "main" ]]; then
+            if [[ "$SOURCE" != "dev" || "$HEAD_REPO" != "$BASE_REPO" ]]; then
+              echo "::error::Only dev can merge into main."
+              exit 1
+            fi
+
+          elif [[ "$TARGET" == "dev" ]]; then
+            if [[ "$SOURCE" != feature/* &&
+                  "$SOURCE" != fix/* &&
+                  "$SOURCE" != hotfix/* ]]; then
+              echo "::error::Only feature/*, fix/*, or hotfix/* can merge into dev."
+              exit 1
+            fi
+          fi
+
+          echo "Branch policy passed!"
