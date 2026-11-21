@@ -1,4 +1,3 @@
-# NETRA Frontend
+## CI Validation Test
 
-Frontend development repository for
-NETRA Cloud Computing Platform.
+Testing automated pull request validation for NETRA Frontend.
