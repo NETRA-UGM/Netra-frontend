@@ -1,0 +1,81 @@
+@font-face { font-family: "Plus Jakarta Sans"; src: url("/login/fonts/PlusJakartaSans-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Plus Jakarta Sans"; src: url("/login/fonts/PlusJakartaSans-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Plus Jakarta Sans"; src: url("/login/fonts/PlusJakartaSans-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Plus Jakarta Sans"; src: url("/login/fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype"); font-weight: 800; font-display: swap; }
+
+.figma-login-page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: "Plus Jakarta Sans", Arial, sans-serif;
+}
+
+.figma-login-layout {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100svh;
+  padding: 32px 24px;
+}
+
+.figma-login-content { display: flex; flex-direction: column; align-items: center; width: min(100%, 640px); transform: translateY(-16px); }
+.figma-login-brand { display: flex; align-items: center; gap: 11px; width: max-content; max-width: 100%; }
+.figma-login-mark { display: block; position: relative; width: 163.5px; height: 96.2px; flex: none; }
+.figma-login-mark img { position: absolute; display: block; width: 24px; height: 18px; max-width: none; transform-origin: top left; }
+.figma-mark-left { left: 0; top: 0; transform: scale(5.34); }
+.figma-mark-right { left: 35.26px; top: 0; transform: scale(5.34); }
+.figma-login-wordmark { margin-right: -16px; font-size: 128px; line-height: normal; font-weight: 800; letter-spacing: 16.64px; white-space: nowrap; }
+
+.figma-login-panel { position: relative; width: 403px; max-width: 100%; margin-top: 17px; }
+.figma-login-panel h1 { margin: 0 0 29px; text-align: center; font-size: 36px; font-weight: 600; line-height: 1.25; letter-spacing: -.6px; }
+.figma-login-form { width: 100%; font-family: Inter, Arial, sans-serif; }
+.figma-login-fields { display: grid; gap: 16px; }
+.figma-login-field { display: flex; align-items: center; gap: 8px; width: 100%; height: 48px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 0 16px; transition: border-color .2s, box-shadow .2s; }
+.figma-login-field:focus-within { border-color: #5394ef; box-shadow: 0 0 0 3px #006aff45; }
+.figma-login-field img { display: block; flex: none; max-width: none; }
+.figma-login-field .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.figma-login-field input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: #fff; font-size: 12px; line-height: 1.4; }
+.figma-login-field input::placeholder { color: #fff; opacity: 1; }
+.figma-login-field input:-webkit-autofill { -webkit-text-fill-color: #fff; transition: background-color 5000s ease-in-out 0s; }
+.figma-login-terms { margin: 14px 0 0; color: #fff; font-size: 11px; line-height: 1.4; }
+.figma-login-terms span { color: #378fe0; }
+.figma-login-error { margin: 13px 0 0; color: #ffc8c8; background: #6e222a; border: 1px solid #a24550; border-radius: 6px; padding: 9px 11px; font-size: 11px; line-height: 1.5; }
+.figma-login-submit { display: grid; place-items: center; width: 100%; height: 48px; margin-top: 29px; border: 0; border-radius: 8px; color: #fff; background: #216cd6; font-size: 16px; font-weight: 700; transition: background .2s, transform .2s; }
+.figma-login-submit:hover:not(:disabled) { background: #3281eb; transform: translateY(-1px); }
+.figma-login-submit:focus-visible { outline: 3px solid #9cc6ff; outline-offset: 3px; }
+.figma-login-submit:disabled { opacity: .72; cursor: wait; }
+
+.figma-particle-field { position: absolute; z-index: 0; inset: 0; pointer-events: none; }
+.figma-particle-canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+
+@media (max-width: 700px) {
+  .figma-login-brand { gap: 8px; }
+  .figma-login-mark { width: 102px; height: 60px; }
+  .figma-mark-left { transform: scale(3.34); }
+  .figma-mark-right { left: 22px; transform: scale(3.34); }
+  .figma-login-wordmark { font-size: 80px; letter-spacing: 10px; }
+  .figma-login-panel { margin-top: 25px; }
+}
+
+@media (max-width: 480px) {
+  .figma-login-layout { padding: 28px 20px; }
+  .figma-login-content { transform: none; }
+  .figma-login-brand { gap: 6px; }
+  .figma-login-mark { width: 68px; height: 40px; }
+  .figma-mark-left { transform: scale(2.225); }
+  .figma-mark-right { left: 14.7px; transform: scale(2.225); }
+  .figma-login-wordmark { font-size: 54px; letter-spacing: 6px; }
+  .figma-login-panel { margin-top: 30px; }
+  .figma-login-panel h1 { font-size: 30px; }
+  .figma-login-terms { font-size: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .figma-login-submit, .figma-login-field { transition: none; }
+}
