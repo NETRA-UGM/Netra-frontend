@@ -38,7 +38,7 @@
 .figma-login-fields { display: grid; gap: 16px; }
 .figma-login-field { display: flex; align-items: center; gap: 8px; width: 100%; height: 48px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 0 16px; transition: border-color .2s, box-shadow .2s; }
 .figma-login-field:focus-within { border-color: #5394ef; box-shadow: 0 0 0 3px #006aff45; }
-.figma-login-field img { display: block; flex: none; max-width: none; }
+.figma-login-field svg { display: block; flex: none; }
 .figma-login-field .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .figma-login-field input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: #fff; font-size: 12px; line-height: 1.4; }
 .figma-login-field input::placeholder { color: #fff; opacity: 1; }

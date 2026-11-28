@@ -1,0 +1,405 @@
+@font-face {
+  font-family: "NETRA Wordmark";
+  src: url("/dashboard/PlusJakartaSans-Variable.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+.sidebar-frame {
+  --compact-width: 75px;
+  --expanded-width: 242px;
+  --sidebar-width: var(--expanded-width);
+  --menu-square: 40px;
+  --rail-inset: calc((var(--compact-width) - var(--menu-square)) / 2);
+  --label-gap: 14px;
+  --sidebar-duration: 540ms;
+  --sidebar-easing: cubic-bezier(0.45, 0, 0.25, 1);
+  --sidebar-motion: var(--sidebar-duration) var(--sidebar-easing);
+  --submenu-motion: 280ms cubic-bezier(0.25, 0, 0.2, 1);
+  --sidebar-label-opacity: 1;
+  --sidebar-label-offset: 0;
+  --sidebar-label-delay: 155ms;
+  --sidebar-chevron-delay: 260ms;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  flex: none;
+  width: var(--sidebar-width);
+  height: 100dvh;
+  z-index: 5;
+}
+
+.sidebar-frame[data-expanded="false"] {
+  --sidebar-width: var(--compact-width);
+  --sidebar-label-opacity: 0;
+  --sidebar-label-offset: -8px;
+  --sidebar-label-delay: 0ms;
+  --sidebar-chevron-delay: 0ms;
+}
+
+.console-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 24px;
+  overflow: hidden auto;
+  background: #1a1919;
+  color: white;
+}
+
+.console-brand {
+  display: flex;
+  align-items: center;
+  flex: none;
+  width: 100%;
+  height: 86px;
+  padding-inline-start: calc((var(--compact-width) - 37px) / 2);
+  gap: calc(var(--label-gap) + (var(--menu-square) - 37px) / 2);
+}
+
+.console-mark {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 37px;
+  height: 21.765px;
+}
+
+.console-mark img {
+  position: absolute;
+  top: 0;
+  max-width: none;
+}
+
+.console-mark img:first-child {
+  left: 0;
+  transform: rotate(180deg);
+}
+
+.console-mark img:last-child {
+  left: 7.98px;
+}
+
+.sidebar-wordmark {
+  font:
+    700 20px/1.25 "NETRA Wordmark",
+    Jakarta,
+    sans-serif;
+  letter-spacing: 6.4px;
+}
+
+.sidebar-wordmark,
+.sidebar-label {
+  white-space: nowrap;
+  opacity: var(--sidebar-label-opacity);
+  transform: translateX(var(--sidebar-label-offset));
+}
+
+.sidebar-nav {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+}
+
+.sidebar-divider {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  flex: none;
+}
+
+.sidebar-divider::after {
+  content: "";
+  width: clamp(28px, calc(100% - var(--compact-width) + 28px), 164px);
+  margin-inline-start: calc((var(--compact-width) - 28px) / 2);
+  height: 0.5px;
+  background: #77838b;
+}
+
+.sidebar-divider-first {
+  height: 16px;
+}
+
+.side-button,
+.sidebar-toggle {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: var(--label-gap);
+  padding: 0 0 0 var(--rail-inset);
+  width: 100%;
+  height: 48px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: rgb(255 255 255 / 75%);
+  text-align: left;
+}
+
+.side-button {
+  --sidebar-icon-width: 24px;
+  position: relative;
+  isolation: isolate;
+}
+
+.side-button::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  inset-inline: var(--rail-inset);
+  height: var(--menu-square);
+  border-radius: 6px;
+  transform: translateY(-50%);
+  transition: background-color 150ms ease;
+  pointer-events: none;
+}
+
+.console-sidebar .side-button {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.sidebar-item-icon {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: var(--menu-square);
+  height: var(--menu-square);
+  border-radius: 6px;
+  transition: background-color 150ms ease;
+}
+
+.sidebar-item-icon::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 50%;
+  width: 4px;
+  height: 26px;
+  border-radius: 4px;
+  background: white;
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity 150ms ease;
+  pointer-events: none;
+}
+
+.side-button:not([data-current="true"]):hover .sidebar-item-icon,
+.side-button:not([data-current="true"]):focus-visible .sidebar-item-icon,
+.sidebar-toggle:hover {
+  background-color: rgb(255 255 255 / 10%);
+}
+
+.side-button[data-current="true"] {
+  color: white;
+  font-weight: 500;
+}
+
+.side-button[data-current="true"]::before {
+  background-color: #006aff;
+}
+
+.side-button[data-current="true"] .sidebar-item-icon::after {
+  opacity: 1;
+}
+
+.side-button:focus-visible,
+.sidebar-toggle:focus-visible,
+.sidebar-submenu button:focus-visible {
+  outline-offset: -2px;
+}
+
+.sidebar-item-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.side-button .sidebar-chevron {
+  position: absolute;
+  left: calc(var(--expanded-width) - 44px);
+  width: 24px;
+  height: 24px;
+  opacity: var(--sidebar-label-opacity);
+  transition:
+    transform 200ms ease,
+    opacity 180ms ease var(--sidebar-chevron-delay);
+}
+
+.side-button[aria-expanded="true"] .sidebar-chevron {
+  transform: rotate(180deg);
+}
+
+.sidebar-network .side-button,
+.sidebar-notifications {
+  --sidebar-icon-width: 20px;
+}
+
+.sidebar-notifications .sidebar-item-icon svg {
+  width: var(--sidebar-icon-width);
+}
+
+.sidebar-workloads .side-button {
+  --sidebar-icon-width: 18px;
+  --sidebar-icon-height: 22px;
+}
+
+.sidebar-resource-icon {
+  flex: none;
+  width: var(--sidebar-icon-width);
+  height: var(--sidebar-icon-height, 24px);
+  max-width: none;
+  object-fit: cover;
+  opacity: 0.75;
+  transition: opacity 150ms ease;
+}
+
+.sidebar-frame[data-expanded="false"] .sidebar-resource-icon,
+.side-button[data-current="true"] .sidebar-resource-icon {
+  opacity: 1;
+}
+
+.sidebar-submenu {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--submenu-motion),
+    opacity 180ms ease;
+}
+
+.sidebar-submenu[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: var(--sidebar-label-opacity);
+}
+
+.sidebar-submenu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+  overflow: hidden;
+  padding-inline-start: calc(
+    var(--rail-inset) + var(--menu-square) + var(--label-gap) - 29px
+  );
+}
+
+.sidebar-submenu button {
+  display: block;
+  width: 100%;
+  flex: none;
+  height: 24px;
+  padding: 0 16px 0 29px;
+  border-radius: 4px;
+  color: rgb(255 255 255 / 75%);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.console-sidebar .sidebar-submenu button {
+  font-size: 14px;
+  line-height: 24px;
+  transition: color 150ms ease;
+}
+
+.sidebar-submenu button:hover,
+.sidebar-submenu button:focus-visible {
+  color: #0972d3;
+}
+
+.sidebar-submenu button:active,
+.sidebar-submenu button[aria-current="true"] {
+  color: #ec7211;
+}
+
+.sidebar-toggle {
+  justify-content: center;
+  width: var(--menu-square);
+  height: var(--menu-square);
+  margin: 12px 0 0 var(--rail-inset);
+  padding: 0;
+  color: white;
+}
+
+.sidebar-toggle-icons {
+  display: grid;
+}
+
+.sidebar-toggle-icons svg {
+  grid-area: 1 / 1;
+  width: 20px;
+  height: 20px;
+  transition: opacity 150ms ease;
+}
+
+.sidebar-toggle-fold {
+  opacity: var(--sidebar-label-opacity);
+}
+
+.sidebar-toggle-unfold {
+  opacity: calc(1 - var(--sidebar-label-opacity));
+}
+
+.sidebar-frame[data-expanded="false"] .side-button {
+  color: white;
+}
+
+.sidebar-frame[data-animate="true"] {
+  transition: width var(--sidebar-motion);
+}
+
+.sidebar-frame[data-animate="true"] .sidebar-wordmark,
+.sidebar-frame[data-animate="true"] .sidebar-label {
+  transition:
+    opacity 235ms ease var(--sidebar-label-delay),
+    transform var(--sidebar-motion);
+}
+
+@media (max-width: 1199px) {
+  .sidebar-frame {
+    width: var(--compact-width);
+  }
+
+  .sidebar-frame .console-sidebar {
+    width: var(--sidebar-width);
+  }
+
+  .sidebar-frame[data-animate="true"] .console-sidebar {
+    transition:
+      width var(--sidebar-motion),
+      box-shadow var(--sidebar-motion);
+  }
+
+  .sidebar-frame[data-expanded="true"] .console-sidebar {
+    box-shadow: 8px 0 24px rgb(0 0 0 / 20%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-frame {
+    --sidebar-duration: 0ms;
+    --sidebar-label-delay: 0ms;
+  }
+
+  .sidebar-frame[data-animate="true"] .console-sidebar,
+  .sidebar-frame[data-animate="true"] .sidebar-wordmark,
+  .sidebar-frame[data-animate="true"] .sidebar-label,
+  .sidebar-frame .sidebar-chevron,
+  .sidebar-frame .side-button::before,
+  .sidebar-frame .sidebar-item-icon,
+  .sidebar-frame .sidebar-item-icon::after,
+  .sidebar-frame .sidebar-submenu button,
+  .sidebar-frame .sidebar-resource-icon,
+  .sidebar-frame .sidebar-submenu,
+  .sidebar-frame .sidebar-toggle-icons svg {
+    transition: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .sidebar-frame {
+    --compact-width: 58px;
+  }
+}
